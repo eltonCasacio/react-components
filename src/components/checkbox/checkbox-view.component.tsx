@@ -2,14 +2,17 @@ import React from "react";
 import * as S from "./checkbox.styled";
 
 type CheckboxProps = {
-  label: string;
-};
+  onCheck?: (status: boolean) => void;
+  label?: string;
+  labelFor?: string;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 const CheckboxView: React.FC<CheckboxProps> = (params) => {
+
   return (
     <S.Wrapper>
-      <input id="checkbox" type="checkbox" />
-      <label htmlFor="checkbox">{params.label}</label>
+      <S.Input id={params.labelFor} type="checkbox" onChange={params.onChange} checked={params.checked}/>
+      {!!params.label && <S.Label htmlFor={params.labelFor}>{params.label}</S.Label>}
     </S.Wrapper>
   );
 };
