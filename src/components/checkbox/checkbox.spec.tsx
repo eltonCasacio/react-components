@@ -1,6 +1,6 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
-import Checkbox from "./checkbox.component";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import Checkbox from "./checkbox";
 import userEvent from "@testing-library/user-event";
 
 describe("Checkbox unit test", () => {
@@ -22,10 +22,33 @@ describe("Checkbox unit test", () => {
     render(<Checkbox onCheck={onCheck} labelFor="Action" />);
     expect(onCheck).not.toHaveBeenCalled();
 
-    userEvent.click(screen.getByRole("checkbox"));
+    fireEvent.click(screen.getByRole("checkbox"));
     await waitFor(() => {
       expect(onCheck).toHaveBeenCalledTimes(1);
     });
+
     expect(onCheck).toHaveBeenCalledWith(true);
+  });
+
+  it("should call oncheck with false value when isChecked is passed", async () => {
+    const onCheck = jest.fn();
+    render(<Checkbox onCheck={onCheck} labelFor="Action" isChecked />);
+
+    fireEvent.click(screen.getByRole("checkbox"));
+    await waitFor(() => {
+      expect(onCheck).toHaveBeenCalledTimes(1);
+    });
+
+    expect(onCheck).toHaveBeenCalledWith(false);
+  });
+
+  it("should th body to heve focus", async () => {
+    render(<Checkbox labelFor="Action" />);
+    expect(document.body).toHaveFocus();
+
+    userEvent.tab();
+    await waitFor(() => {
+      expect(screen.getByRole("checkbox")).toHaveFocus();
+    })
   });
 });
