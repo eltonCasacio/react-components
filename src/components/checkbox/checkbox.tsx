@@ -11,8 +11,20 @@ type CheckboxProps = {
   onCheck?: (status: boolean) => void;
 };
 
-const Checkbox: React.FC<CheckboxProps> = ({ ...props }) => {
-  return <CheckboxView {...props} />;
+const Checkbox: React.FC<CheckboxProps> = ({
+  isChecked,
+  onCheck,
+  value,
+  ...props
+}) => {
+  const [checked, setChecked] = React.useState(isChecked);
+
+  const onChange = () => {
+    const status = !checked;
+    setChecked(status);
+    !!onCheck && onCheck(status);
+  };
+  return <CheckboxView {...props} onChange={onChange} value={value} />;
 };
 
 export default Checkbox;
