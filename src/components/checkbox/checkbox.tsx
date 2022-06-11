@@ -6,13 +6,13 @@ type CheckboxProps = {
   labelFor?: string;
   labelColor?: string;
   backgroundColor?: string;
-  checkedColor?: string;
   isChecked?: boolean;
+  value?: string | ReadonlyArray<string> | number;
   onCheck?: (status: boolean) => void;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+};
 
-const Checkbox: React.FC<CheckboxProps> = ({ onCheck, checked, ...props }) => {
-  return <CheckboxView onCheck={onCheck} checked={checked} {...props} />;
+const Checkbox: React.FC<CheckboxProps> = ({ ...props }) => {
+  return <CheckboxView {...props} />;
 };
 
 export default Checkbox;

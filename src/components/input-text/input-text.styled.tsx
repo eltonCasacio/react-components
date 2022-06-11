@@ -11,7 +11,7 @@ export const InputWrapperStyled = styled.div<InputTextProps>`
   ${({ iconPosition, disabled, hasError }) => css`
     display: flex;
     flex-direction: ${iconPosition === "right" ? "row-reverse" : "row"};
-    padding: 0 5px;
+    padding: 10px;
     border: 1px solid;
     border-radius: 3px;
     border-color: ${hasError ? "#ff3c3c" : "#94949489"};

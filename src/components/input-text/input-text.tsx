@@ -2,30 +2,35 @@ import React from "react";
 import InputTextView from "./input-text-view";
 
 type InputTextProps = {
+  inputType?: string;
   label?: string;
   labelFor?: string;
   initialValue?: string;
+  placeholder?: string;
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
-  value?: string;
+  changePasswordVisible?: () => void;
   disabled?: boolean;
   hasError?: boolean;
   errorMessage?: string;
-  onInput?: (value: string) => void;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+  passwordVisible?: boolean;
+  onTyping?: (value: string) => void;
+};
 
 const Checkbox: React.FC<InputTextProps> = ({
+  inputType,
   label,
   labelFor,
   initialValue,
+  placeholder,
   icon,
   iconPosition,
+  changePasswordVisible,
   disabled,
   hasError,
   errorMessage,
-  onInput,
-  ...props
+  passwordVisible,
+  onTyping,
 }) => {
   const [value, setValue] = React.useState(initialValue);
 
@@ -33,20 +38,24 @@ const Checkbox: React.FC<InputTextProps> = ({
     const newValue = e.currentTarget.value;
     setValue(newValue);
 
-    !!onInput && onInput(newValue);
+    !!onTyping && onTyping(newValue);
   };
 
   return (
     <InputTextView
+      inputType={inputType}
+      label={label}
+      labelFor={labelFor}
+      value={value}
+      placeholder={placeholder}
       icon={icon}
       iconPosition={iconPosition}
-      label={label}
-      value={value}
+      changePasswordVisible={changePasswordVisible}
       disabled={disabled}
-      onChange={onChange}
       hasError={hasError}
       errorMessage={errorMessage}
-      {...props}
+      passwordVisible={passwordVisible}
+      onChange={onChange}
     />
   );
 };

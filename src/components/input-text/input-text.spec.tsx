@@ -18,15 +18,9 @@ describe("<InputText />", () => {
   });
 
   it("Does not changes its value when disabled", async () => {
-    const onInput = jest.fn();
+    const onTyping = jest.fn();
     render(
-      <InputText
-        onInput={onInput}
-        label="TextField"
-        labelFor="TextField"
-        id="TextField"
-        disabled
-      />
+      <InputText onTyping={onTyping} label="TextField" labelFor="TextField" disabled />
     );
 
     const input = screen.getByRole("textbox");
@@ -38,11 +32,11 @@ describe("<InputText />", () => {
     await waitFor(() => {
       expect(input).not.toHaveValue(text);
     });
-    expect(onInput).not.toHaveBeenCalled();
+    expect(onTyping).not.toHaveBeenCalled();
   });
 
   it("Is not accessible by tab when disabled", () => {
-    render(<InputText label="TextField" labelFor="TextField" id="TextField" disabled />);
+    render(<InputText label="TextField" labelFor="TextField" disabled />);
 
     const input = screen.getByRole("textbox");
     expect(document.body).toHaveFocus();

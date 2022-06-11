@@ -6,7 +6,6 @@ type CheckboxProps = {
   labelFor?: string;
   labelColor?: string;
   backgroundColor?: string;
-  checkedColor?: string;
   isChecked?: boolean;
   value?: string | ReadonlyArray<string> | number;
   onCheck?: (status: boolean) => void;
@@ -17,7 +16,6 @@ const CheckboxView: React.FC<CheckboxProps> = ({
   labelFor,
   labelColor,
   backgroundColor,
-  checkedColor,
   isChecked = false,
   value,
   onCheck,

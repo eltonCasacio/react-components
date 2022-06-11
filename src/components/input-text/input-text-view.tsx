@@ -9,18 +9,22 @@ import {
 } from "./input-text.styled";
 
 export type InputTextProps = {
+  inputType?: string;
   label?: string;
   labelFor?: string;
   value?: string;
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
-  disabled?: boolean;
   hasError?: boolean;
   errorMessage?: string;
+  passwordVisible?: boolean;
+  disabled?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  changePasswordVisible?: () => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const InputTextView: React.FC<InputTextProps> = ({
+  inputType = "text",
   label,
   labelFor,
   value,
@@ -29,7 +33,9 @@ const InputTextView: React.FC<InputTextProps> = ({
   disabled = false,
   hasError = false,
   errorMessage = "Invalid value",
+  passwordVisible = false,
   onChange,
+  changePasswordVisible,
   ...props
 }) => {
   return (
@@ -44,9 +50,9 @@ const InputTextView: React.FC<InputTextProps> = ({
         disabled={disabled}
         hasError={hasError}
       >
-        {!!icon && <IconStyled>{icon}</IconStyled>}
+        {!!icon && <IconStyled onClick={changePasswordVisible}>{icon}</IconStyled>}
         <InputStyled
-          type={"text"}
+          type={passwordVisible ? "text" : inputType}
           onChange={onChange}
           value={value}
           disabled={disabled}
