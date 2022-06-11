@@ -6,8 +6,8 @@ type CheckboxProps = {
   labelFor?: string;
   labelColor?: string;
   backgroundColor?: string;
-  isChecked?: boolean;
   value?: string | ReadonlyArray<string> | number;
+  isChecked?: boolean;
   onCheck?: (status: boolean) => void;
 };
 
